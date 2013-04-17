@@ -2,6 +2,8 @@ var util = require('util');
 var winston = require('winston');
 var moment = require('moment');
 
+require('colors');
+
 function TaggedConsoleTarget(options) {
 	options = options || {};
 
