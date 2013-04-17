@@ -1,17 +1,19 @@
 TaggedConsoleTarget
 ===================
 
-A log target for Winston that expects tagged log messages and writes them with lots of colors to the console or a given output stream.
+A log target for [Winston](https://npmjs.org/package/winston) that expects tagged log messages and writes them with lots of colors to the console or a given output stream.
 
 This module is designed to work together with [`TaggedLogger`](https://npmjs.org/package/tagged-logger).
 
 Install
 -------
 
-    npm install winston tagged-console-target
+    npm install tagged-console-target
 
 Example
 -------
+
+For this example you need to `npm install tagged-console-target`.
 
 	var winston = require('winston');
 	var TaggedConsoleTarget = require('tagged-console-target');
