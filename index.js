@@ -12,7 +12,7 @@ function TaggedConsoleTarget(options) {
 	this.target = options.target || process.stdout;
 
 	this.prevTimestamp = new Date();
-	this.target.write(moment(this.prevTimestamp).format('hh:mm:ss.SSS YYYY-MM-DD dddd').grey + '\n');
+	this.target.write(moment(this.prevTimestamp).format('HH:mm:ss.SSS YYYY-MM-DD dddd').grey + '\n');
 };
 util.inherits(TaggedConsoleTarget, winston.Transport);
 
@@ -36,10 +36,10 @@ TaggedConsoleTarget.prototype.log = function (level, msg, meta, callback) {
 
 	if (moment(timestamp).format('YYYY-MM-DD') !== moment(this.prevTimestamp).format('YYYY-MM-DD')) {
 		this.prevTimestamp = timestamp;
-		this.target.write(moment(timestamp).format('hh:mm:ss.SSS YYYY-MM-DD dddd').grey + '\n');
+		this.target.write(moment(timestamp).format('HH:mm:ss.SSS YYYY-MM-DD dddd').grey + '\n');
 	}
 
-	this.target.write(moment(timestamp).format('hh:mm:ss.SSS').grey + (' [' + tags.join(', ') + '] ').green + msg[color] + '\n');
+	this.target.write(moment(timestamp).format('HH:mm:ss.SSS').grey + (' [' + tags.join(', ') + '] ').green + msg[color] + '\n');
 	callback(null, true);
 };
 

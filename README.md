@@ -31,10 +31,10 @@ For this example you need to `npm install winston tagged-console-target`.
 
 Example output:
 
-	04:46:06.004 2013-04-17 Wednesday
-	04:46:06.007 [module a] Log message 1
-	04:46:06.008 [module a, submodule a1] Log message 2
-	04:46:06.008 [module b] Log message 3
+	16:46:06.004 2013-04-17 Wednesday
+	16:46:06.007 [module a] Log message 1
+	16:46:06.008 [module a, submodule a1] Log message 2
+	16:46:06.008 [module b] Log message 3
 
 Except the output is in *glorious* color!
 
