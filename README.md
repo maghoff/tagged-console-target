@@ -13,7 +13,7 @@ Install
 Example
 -------
 
-For this example you need to `npm install tagged-console-target`.
+For this example you need to `npm install winston tagged-console-target`.
 
 	var winston = require('winston');
 	var TaggedConsoleTarget = require('tagged-console-target');
