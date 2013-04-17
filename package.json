@@ -1,0 +1,19 @@
+{
+  "name": "tagged-console-target",
+  "version": "1.0.0",
+  "description": "A log target for Winston that expects tagged log messages",
+  "main": "index.js",
+  "repository": {
+    "type": "hg",
+    "url": "https://bitbucket.org/maghoff/tagged-console-target"
+  },
+  "bugs": {
+    "url": "https://bitbucket.org/maghoff/tagged-console-target/issues"
+  },
+  "author": "Magnus Hoff <maghoff@gmail.com>",
+  "license": "BSD",
+  "dependencies": {
+    "moment": "~2.0.0",
+    "winston": "*"
+  }
+}
