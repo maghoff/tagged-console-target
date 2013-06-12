@@ -38,9 +38,19 @@ TaggedConsoleTarget.prototype.log = function (level, msg, meta, callback) {
 		this.target.write(moment(timestamp).format('HH:mm:ss.SSS YYYY-MM-DD dddd').grey + '\n');
 	}
 
-	var coloredMessage = msg;
-	if (color) coloredMessage = coloredMessage[color];
-	this.target.write(moment(timestamp).format('HH:mm:ss.SSS').grey + (' [' + tags.join(', ') + '] ').green + coloredMessage + '\n');
+	var header = moment(timestamp).format('HH:mm:ss.SSS').grey + (' [' + tags.join(', ') + ']').green;
+
+	var target = this.target;
+	msg.split('\n').forEach(function (line, index) {
+		var coloredLine;
+		if (color) coloredLine = line[color];
+		else coloredLine = line;
+
+		var separator = [' ', '>'][index === 0 ? 0 : 1].grey;
+
+		target.write(header + separator + coloredLine + '\n');
+	});
+
 	callback(null, true);
 };
 
