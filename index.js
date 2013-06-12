@@ -19,7 +19,6 @@ util.inherits(TaggedConsoleTarget, winston.Transport);
 TaggedConsoleTarget.prototype.log = function (level, msg, meta, callback) {
 	var spec = {
 		'info': {
-			color: "white",
 		},
 		'warn': {
 			color: "yellow"
@@ -39,7 +38,9 @@ TaggedConsoleTarget.prototype.log = function (level, msg, meta, callback) {
 		this.target.write(moment(timestamp).format('HH:mm:ss.SSS YYYY-MM-DD dddd').grey + '\n');
 	}
 
-	this.target.write(moment(timestamp).format('HH:mm:ss.SSS').grey + (' [' + tags.join(', ') + '] ').green + msg[color] + '\n');
+	var coloredMessage = msg;
+	if (color) coloredMessage = coloredMessage[color];
+	this.target.write(moment(timestamp).format('HH:mm:ss.SSS').grey + (' [' + tags.join(', ') + '] ').green + coloredMessage + '\n');
 	callback(null, true);
 };
 
