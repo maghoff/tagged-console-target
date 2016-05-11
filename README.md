@@ -41,6 +41,10 @@ Except the output is in *glorious* color!
 Options
 -------
 
-`TaggedConsoleTarget` accepts one option:
+`TaggedConsoleTarget` accepts an object with options for the constructor. The accepted options are:
 
- * **target**: The target output stream. Defaults to `process.stdout`.
+ * `target`: The target output stream. Defaults to `process.stdout`
+ * `level`: The minimum level of log messages to output to this logger, for example `"info"`. Keep this unset to allow all messages that are accepted by the logger object
+ * `handleExceptions`: Set to `true` to intercept unhandled exceptions and output them to this log target
+ * `exceptionsLevel`: The log level at which to log exceptions. Defaults to `error`
+ * `humanReadableUnhandledException`: Format exception log output in a more readable fashion

@@ -7,9 +7,19 @@ require('colors');
 function TaggedConsoleTarget(options) {
 	options = options || {};
 
-	this.name = 'taggedConsoleLogger';
-	this.level = options.level || 'info';
+	winston.Transport.call(this, {
+		name: 'taggedConsoleLogger',
+		level: options.level,
+		handleExceptions: options.handleExceptions,
+		exceptionsLevel: options.exceptionsLevel,
+		humanReadableUnhandledException: options.humanReadableUnhandledException
+	});
+
 	this.target = options.target || process.stdout;
+
+	this.target.on('error', function (err) {
+		this.emit('error', err);
+	}.bind(this));
 
 	this.prevTimestamp = new Date();
 	this.target.write(moment(this.prevTimestamp).format('HH:mm:ss.SSS YYYY-MM-DD dddd').grey + '\n');
@@ -41,6 +51,7 @@ TaggedConsoleTarget.prototype.log = function (level, msg, meta, callback) {
 	var header = moment(timestamp).format('HH:mm:ss.SSS').grey + (' [' + tags.join(', ') + ']').green;
 
 	var target = this.target;
+	var fullyFlushed = true;
 	msg.split('\n').forEach(function (line, index) {
 		var coloredLine;
 		if (color) coloredLine = line[color];
@@ -48,8 +59,16 @@ TaggedConsoleTarget.prototype.log = function (level, msg, meta, callback) {
 
 		var separator = [' ', '>'][index === 0 ? 0 : 1].grey;
 
-		target.write(header + separator + coloredLine + '\n');
+		fullyFlushed &= target.write(header + separator + coloredLine + '\n');
 	});
+
+	if (fullyFlushed) {
+		this.emit('logged');
+	} else {
+		this.target.once('drain', function () {
+			this.emit('logged');
+		}.bind(this));
+	}
 
 	callback(null, true);
 };
