@@ -27,17 +27,12 @@ function TaggedConsoleTarget(options) {
 util.inherits(TaggedConsoleTarget, winston.Transport);
 
 TaggedConsoleTarget.prototype.log = function (level, msg, meta, callback) {
-	var spec = {
-		'info': {
-		},
-		'warn': {
-			color: "yellow"
-		},
-		'error': {
-			color: "red"
-		}
+	var colorForLevel = {
+		'warn': "yellow",
+		'warning': "yellow",
+		'error': "red"
 	};
-	var color = spec[level].color;
+	var color = colorForLevel[level];
 
 	meta = meta || {};
 	var tags = meta.tags || [];
